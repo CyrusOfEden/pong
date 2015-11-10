@@ -8,7 +8,7 @@ const _entity = {
     _.forEach(this.watchers, (fn) => fn.call(this));
     return this;
   },
-  watch: function(callback) {
+  compose: function(callback) {
     this.watchers.push(callback);
     return this;
   },
