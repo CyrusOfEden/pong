@@ -1,5 +1,4 @@
 exports.config = {
-
   files: {
     javascripts: {
       joinTo: {
@@ -11,8 +10,6 @@ exports.config = {
       joinTo: 'app.css'
     }
   },
-
-
   plugins: {
     babel: {
       ignore: [/^(bower_components|vendor)/],

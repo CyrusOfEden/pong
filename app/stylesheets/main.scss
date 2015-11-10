@@ -1,19 +1,26 @@
-$default-bg: white;
-$default-text: black;
-
 body {
-  font-family: Georgia, serif;
-  font-size: 16px;
-  background: $default-bg;
-  color: $default-text;
+  margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  background: #fff;
 }
 
-h1 {
-  font-size: 2em;
-  margin: 0.5em 0 1em;
+#container {
+  width: 600px;
+  margin: auto;
+}
 
-  & > small {
-    color: gray;
-    font-size: 70%;
-  }
+h1, h2, h3 {
+  text-align: center;
+}
+
+#pong-game {
+  border: 10px solid #efefef;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
 }

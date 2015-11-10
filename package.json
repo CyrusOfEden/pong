@@ -1,5 +1,5 @@
 {
-  "name": "project-name",
+  "name": "pong",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,5 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "babel": "^6.0.15",
+    "babel-brunch": "^5.1.2",
+    "bower": "^1.6.5",
+    "brunch": "^1.8.5",
+    "javascript-brunch": "^1.8.0",
+    "sass-brunch": "^1.9.1"
+  }
 }

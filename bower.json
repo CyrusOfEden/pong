@@ -1,6 +1,6 @@
 {
-  "name": "project-name",
+  "name": "pong",
   "dependencies": {
-    "jquery": "~2.1.4"
+    "lodash": "~3.10.1"
   }
 }
