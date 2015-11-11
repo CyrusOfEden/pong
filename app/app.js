@@ -42,11 +42,11 @@ let context = getContext(canvas);
     downKey: 40 // down
   }, controlsConfig));
 
-  leftPaddle.compose(restrictBounds);
   leftPaddle.compose(leftControls);
+  leftPaddle.compose(restrictBounds);
 
-  rightPaddle.compose(restrictBounds);
   rightPaddle.compose(rightControls);
+  rightPaddle.compose(restrictBounds);
 }
 
 {
