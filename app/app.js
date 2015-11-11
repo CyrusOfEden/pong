@@ -30,22 +30,17 @@ let context = getContext(canvas);
     keys: keys,
     paddleConfig: config.paddle
   };
+  let leftConfig = _.assign(controlsConfig, { upKey: 87, downKey: 83 });
+  let rightConfig = _.assign(controlsConfig, { upKey: 38, downKey: 40 });
+
+  leftPaddle.compose(behavior.addControls(leftConfig));
+  rightPaddle.compose(behavior.addControls(rightConfig));
+
   let restrictBounds = behavior.restrictBounds({
     canvasConfig: config.canvas
   });
-  let leftControls = behavior.addControls(_.assign({
-    upKey: 87, // w
-    downKey: 83 // s
-  }, controlsConfig));
-  let rightControls = behavior.addControls(_.assign({
-    upKey: 38, // up
-    downKey: 40 // down
-  }, controlsConfig));
 
-  leftPaddle.compose(leftControls);
   leftPaddle.compose(restrictBounds);
-
-  rightPaddle.compose(rightControls);
   rightPaddle.compose(restrictBounds);
 }
 
