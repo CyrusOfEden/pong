@@ -1,6 +1,6 @@
 function setupBall() {
   return {
-    radius: 5,
+    radius: 8,
     x: 300,
     y: 200,
     velocityX: _.sample([-4, -3, 3, 4]),
@@ -12,7 +12,15 @@ export default {
   paddle: {
     height: 60,
     width: 10,
-    moveSpeed: 8
+    moveSpeed: 6
+  },
+  leftPaddle: {
+    upKey: 87, // w
+    downKey: 83 // s
+  },
+  rightPaddle: {
+    upKey: 38, // up arrow
+    downKey: 40 // down arrow
   },
   ball: {
     setup: setupBall

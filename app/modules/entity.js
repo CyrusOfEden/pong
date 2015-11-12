@@ -5,7 +5,7 @@ const _entity = {
   velocityX: 0,
   velocityY: 0,
   nextFrame: function() {
-    _.forEach(this.watchers, (fn) => fn.call(this));
+    for (let fn of this.watchers) fn.call(this);
     return this;
   },
   compose: function(callback) {
@@ -13,7 +13,7 @@ const _entity = {
     return this;
   },
   reset: function() {
-    _.assign(this, ...this.setup());
+    Object.assign(this, ...this.setup());
   },
   render: function(_) {
     console.error("Implement a render method for ", this);
@@ -21,8 +21,9 @@ const _entity = {
 };
 
 export default function createEntity(prototype, ...props) {
-  let setup = function() { return props; };
+  let setup = () => props;
   let watchers = [];
-  let entity = _.assign({}, _entity, prototype, {setup}, ...props);
-  return _.assign(entity, {watchers}, ...entity.setup());
+  let entity = Object.assign({}, _entity, prototype, {setup, watchers}, ...props);
+  entity.reset();
+  return entity;
 }

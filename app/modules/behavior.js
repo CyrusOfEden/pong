@@ -4,8 +4,8 @@ function addControls(params) {
     let moveSpeed = 0;
     if (keys[upKey]) moveSpeed -= paddleConfig.moveSpeed;
     if (keys[downKey]) moveSpeed += paddleConfig.moveSpeed;
+    this.y += this.velocityY + (moveSpeed / 6);
     this.velocityY = moveSpeed;
-    this.y += moveSpeed;
   }
 }
 

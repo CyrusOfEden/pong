@@ -30,8 +30,8 @@ let context = getContext(canvas);
     keys: keys,
     paddleConfig: config.paddle
   };
-  let leftConfig = _.assign(controlsConfig, { upKey: 87, downKey: 83 });
-  let rightConfig = _.assign(controlsConfig, { upKey: 38, downKey: 40 });
+  let leftConfig = Object.assign({}, controlsConfig, config.leftPaddle);
+  let rightConfig = Object.assign({}, controlsConfig, config.rightPaddle);
 
   leftPaddle.compose(behavior.addControls(leftConfig));
   rightPaddle.compose(behavior.addControls(rightConfig));
@@ -45,10 +45,15 @@ let context = getContext(canvas);
 }
 
 {
-  let wall = behavior.wallCollision({ canvasConfig: config.canvas });
+  let wall = behavior.wallCollision({
+    canvasConfig: config.canvas
+  });
   let left = behavior.leftPaddleCollision({leftPaddle});
   let right = behavior.rightPaddleCollision({rightPaddle});
-  let edge = behavior.edgeCollision({ canvasConfig: config.canvas, score });
+  let edge = behavior.edgeCollision({
+    canvasConfig: config.canvas,
+    score: score
+  });
 
   ball.compose(wall);
   ball.compose(left);
@@ -63,13 +68,14 @@ function bootstrap() {
   let rightScore = document.getElementById("right-score");
 
   function nextFrame() {
-    // update entities
-    _.invoke(entities, "nextFrame");
     // reset canvas
     context.fillStyle = "#ffffff";
     context.fillRect(0, 0, config.canvas.width, config.canvas.height);
     // render entities
-    _.invoke(entities, "render", context);
+    for (let entity of entities) {
+      entity.nextFrame();
+      entity.render(context);
+    }
     // update scores
     leftScore.innerText = score.left;
     rightScore.innerText = score.right;

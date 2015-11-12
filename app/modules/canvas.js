@@ -1,5 +1,5 @@
 export function createCanvas(...props) {
-  return _.assign(document.createElement("canvas"), ...props);
+  return Object.assign(document.createElement("canvas"), ...props);
 }
 
 export function getContext(canvas) {
