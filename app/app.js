@@ -19,7 +19,7 @@ let score = {
   right: 0
 };
 
-let entities = [leftPaddle, rightPaddle, ball];
+let entities = [ball, leftPaddle, rightPaddle];
 
 let canvas = createCanvas(config.canvas);
 let context = getContext(canvas);
