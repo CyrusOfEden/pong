@@ -30,8 +30,8 @@ let context = getContext(canvas);
     keys: keys,
     paddleConfig: config.paddle
   };
-  let leftConfig = Object.assign({}, controlsConfig, config.leftPaddle);
-  let rightConfig = Object.assign({}, controlsConfig, config.rightPaddle);
+  let leftConfig = _.extend({}, controlsConfig, config.leftPaddle);
+  let rightConfig = _.extend({}, controlsConfig, config.rightPaddle);
 
   leftPaddle.compose(behavior.addControls(leftConfig));
   rightPaddle.compose(behavior.addControls(rightConfig));
@@ -67,14 +67,14 @@ function bootstrap() {
   let leftScore = document.getElementById("left-score");
   let rightScore = document.getElementById("right-score");
 
+  let entity;
+
   function nextFrame() {
-    // reset canvas
-    context.fillStyle = "#ffffff";
-    context.fillRect(0, 0, config.canvas.width, config.canvas.height);
     // render entities
-    for (let entity of entities) {
+    for (entity of entities) {
+      entity.clear(context, "#ffffff");
       entity.nextFrame();
-      entity.render(context);
+      entity.render(context, "#333333");
     }
     // update scores
     leftScore.innerText = score.left;

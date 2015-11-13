@@ -13,9 +13,12 @@ const _entity = {
     return this;
   },
   reset: function() {
-    Object.assign(this, ...this.setup());
+    _.extend(this, ...this.setup());
   },
-  render: function(_) {
+  clear: function() {
+    console.error("Implement a clear method for ", this);
+  },
+  render: function() {
     console.error("Implement a render method for ", this);
   }
 };
@@ -23,7 +26,7 @@ const _entity = {
 export default function createEntity(prototype, ...props) {
   let setup = () => props;
   let watchers = [];
-  let entity = Object.assign({}, _entity, prototype, {setup, watchers}, ...props);
+  let entity = _.extend({}, _entity, prototype, {setup, watchers}, ...props);
   entity.reset();
   return entity;
 }

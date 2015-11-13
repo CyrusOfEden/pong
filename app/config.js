@@ -1,6 +1,6 @@
 function setupBall() {
   return {
-    radius: 8,
+    radius: 6,
     x: 300,
     y: 200,
     velocityX: _.sample([-4, -3, 3, 4]),

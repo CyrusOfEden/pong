@@ -3,13 +3,18 @@ import createEntity from "./entity";
 const _ball = {
   type: "ball",
   radius: 0,
-  render: function(context) {
-    context.beginPath();
-    context.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
-    context.fillStyle = "#333333";
-    context.fill();
-    return this;
+  clear: function(context, color) {
+    this._draw(this.x, this.y, this.radius + 1, context, color);
   },
+  render: function(context, color) {
+    this._draw(this.x, this.y, this.radius, context, color);
+  },
+  _draw: function(x, y, radius, context, color) {
+    context.beginPath();
+    context.arc(x, y, radius, 2 * Math.PI, false);
+    context.fillStyle = color;
+    context.fill();
+  }
 };
 
 export default (...props) => createEntity(_ball, ...props);
