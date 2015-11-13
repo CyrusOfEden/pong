@@ -9,18 +9,19 @@ function setupBall() {
 }
 
 export default {
+  winningScore: 7,
   paddle: {
     height: 60,
     width: 10,
-    moveSpeed: 6
+    moveSpeed: 6,
   },
   leftPaddle: {
     upKey: 87, // w
     downKey: 83 // s
   },
   rightPaddle: {
-    upKey: 38, // up arrow
-    downKey: 40 // down arrow
+    upKey: 73, // i
+    downKey: 75 // k
   },
   ball: {
     setup: setupBall

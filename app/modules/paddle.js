@@ -5,14 +5,15 @@ const _paddle = {
   width: 0,
   height: 0,
   clear: function(context, color) {
-    this._draw(this.x - 1, this.y - 1, this.width + 2, this.height + 2, context, color);
+    return this._draw(this.x - 1, this.y - 1, this.width + 2, this.height + 2, context, color);
   },
   render: function(context, color) {
-    this._draw(this.x, this.y, this.width, this.height, context, color);
+    return this._draw(this.x, this.y, this.width, this.height, context, color);
   },
   _draw: function(x, y, width, height, context, color) {
     context.fillStyle = color;
     context.fillRect(x, y, width, height);
+    return this;
   }
 };
 

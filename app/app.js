@@ -1,8 +1,8 @@
 import {createCanvas, getContext} from "./modules/canvas";
 import createPaddle from "./modules/paddle";
 import createBall from "./modules/ball";
+import createScore from "./modules/score";
 
-import animate from "./modules/animate";
 import pressedKeys from "./modules/pressedKeys";
 
 import behavior from "./modules/behavior";
@@ -11,18 +11,20 @@ import config from "./config";
 
 let keys = pressedKeys();
 
+let score = createScore(config);
+
 let leftPaddle = createPaddle(config.paddle, { x: 0, y: 170 });
 let rightPaddle = createPaddle(config.paddle, { x: 590, y: 170 });
 let ball = createBall(config.ball);
-let score = {
-  left: 0,
-  right: 0
-};
 
 let entities = [ball, leftPaddle, rightPaddle];
 
 let canvas = createCanvas(config.canvas);
 let context = getContext(canvas);
+
+// Reset the context
+context.fillStyle = "#ffffff";
+context.fillRect(0, 0, config.canvas.width, config.canvas.height);
 
 // Configure the behavior for the paddles.
 {
@@ -63,28 +65,4 @@ let context = getContext(canvas);
   ball.compose(behavior.move);
 }
 
-function bootstrap() {
-  let leftScore = document.getElementById("left-score");
-  let rightScore = document.getElementById("right-score");
-
-  let entity;
-
-  function nextFrame() {
-    // render entities
-    for (entity of entities) {
-      entity.clear(context, "#ffffff");
-      entity.nextFrame();
-      entity.render(context, "#333333");
-    }
-    // update scores
-    leftScore.innerText = score.left;
-    rightScore.innerText = score.right;
-    // register callback for the next frame
-    animate(nextFrame);
-  }
-
-  document.getElementById("container").appendChild(canvas);
-  animate(nextFrame);
-}
-
-window.addEventListener("DOMContentLoaded", bootstrap);
+export {entities, canvas, context, score};

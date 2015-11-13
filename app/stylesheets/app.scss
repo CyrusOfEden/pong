@@ -1,16 +1,21 @@
 body {
   margin: 0;
   font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.4;
   background: #fff;
 }
 
 #container {
   width: 600px;
-  margin: auto;
+  margin: 4rem auto;
 }
 
-h1, h2, h3 {
+h1 {
   text-align: center;
+}
+
+p:first-child {
+  margin-top: 0;
 }
 
 #pong-game {
@@ -19,3 +24,24 @@ h1, h2, h3 {
 
 .left { float: left; }
 .right { float: right; }
+
+#help {
+  margin-top: 2em;
+}
+
+dl {
+  margin: 0;
+}
+
+dt {
+  font-weight: bold;
+}
+
+dd {
+  margin-left: 0;
+  margin-bottom: 0.5em;
+}
+
+kbd {
+  font-family: Menlo, Courier, monospace;
+}

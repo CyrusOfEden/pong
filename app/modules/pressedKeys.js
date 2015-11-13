@@ -1,11 +1,13 @@
 export default function pressedKeys() {
   let keys = {};
-  window.addEventListener("keydown", function(event) {
-    keys[event.keyCode] = true;
-  });
 
-  window.addEventListener("keyup", function(event) {
-    delete keys[event.keyCode];
-  });
+  $(window)
+    .on("keydown", (event) => {
+      keys[event.keyCode] = true;
+    })
+    .on("keyup", (event) => {
+      delete keys[event.keyCode];
+    });
+
   return keys;
 }
