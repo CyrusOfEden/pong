@@ -10,7 +10,8 @@ function bootstrap() {
 
   function nextFrame() {
     if (paused) {
-      return animate(nextFrame);
+      animate(nextFrame);
+      return;
     }
     // render entities
     for (entity of entities) {
@@ -28,7 +29,7 @@ function bootstrap() {
       score.reset();
     }
     // register callback for the next frame
-    return animate(nextFrame);
+    animate(nextFrame);
   }
 
   $("#help").before(canvas);

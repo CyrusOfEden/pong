@@ -12,7 +12,7 @@ const _paddle = {
   },
   _draw: function(x, y, width, height, context, color) {
     context.fillStyle = color;
-    context.fillRect(x, y, width, height);
+    context.fillRect((0.5 + x) | 0, (0.5 + y) | 0, width, height);
     return this;
   }
 };

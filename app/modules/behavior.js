@@ -4,7 +4,7 @@ function addControls(params) {
     let moveSpeed = 0;
     if (keys[upKey]) moveSpeed -= paddleConfig.moveSpeed;
     if (keys[downKey]) moveSpeed += paddleConfig.moveSpeed;
-    this.y += this.velocityY + (moveSpeed / 6);
+    this.y += this.velocityY + (moveSpeed / 3);
     this.velocityY = moveSpeed;
   }
 }
@@ -24,6 +24,8 @@ function restrictBounds(params) {
 function wallCollision(params) {
   let {canvasConfig} = params;
   return function() {
+    // Check if the ball has hit a wall and if so,
+    // reduce its velocityY by 0.2
     if (this.y - this.radius <= 0) {
       this.velocityY = -(this.velocityY - 0.2);
     } else if (this.y + this.radius >= canvasConfig.height) {
@@ -34,9 +36,12 @@ function wallCollision(params) {
 function leftPaddleCollision(params) {
   let {leftPaddle} = params;
   return function() {
+    // Check if the ball has collided with the paddle
+    // AND that it is moving towards it (negative velocityX)
     if (this.x - this.radius <= leftPaddle.x + leftPaddle.width &&
         this.y + this.radius >= leftPaddle.y &&
-        this.y - this.radius <= leftPaddle.y + leftPaddle.height) {
+        this.y - this.radius <= leftPaddle.y + leftPaddle.height &&
+        this.velocityX <= 0) {
       this.velocityX = -(this.velocityX - 0.1);
       this.velocityY += (leftPaddle.velocityY / 3);
     }
@@ -45,9 +50,12 @@ function leftPaddleCollision(params) {
 function rightPaddleCollision(params) {
   let {rightPaddle} = params;
   return function() {
+    // Check if the ball has collided with the paddle
+    // AND that it is moving towards it (positive velocityX)
     if (this.x + this.radius >= rightPaddle.x &&
         this.y + this.radius >= rightPaddle.y &&
-        this.y - this.radius <= rightPaddle.y + rightPaddle.height) {
+        this.y - this.radius <= rightPaddle.y + rightPaddle.height &&
+        this.velocityX >= 0) {
       this.velocityX = -(this.velocityX + 0.1);
       this.velocityY += (rightPaddle.velocityY / 3);
     }
@@ -69,15 +77,15 @@ function edgeCollision(params) {
   }
 }
 function limitVelocity() {
-  if (this.velocityX > 5) {
-    this.velocityX = 5;
-  } else if (this.velocityX < -5) {
-    this.velocityX = -5;
+  if (this.velocityX > 6) {
+    this.velocityX = 6;
+  } else if (this.velocityX < -6) {
+    this.velocityX = -6;
   }
-  if (this.velocityY > 5) {
-    this.velocityY = 5;
-  } else if (this.velocityY < -5) {
-    this.velocityY = -5;
+  if (this.velocityY > 6) {
+    this.velocityY = 6;
+  } else if (this.velocityY < -6) {
+    this.velocityY = -6;
   }
 }
 function move() {
