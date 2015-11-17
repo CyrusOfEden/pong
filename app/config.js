@@ -1,13 +1,3 @@
-function setupBall() {
-  return {
-    radius: 6,
-    x: 300,
-    y: 200,
-    velocityX: _.sample([-4, -3, 3, 4]),
-    velocityY: _.sample([-2, -1, 0, 1, 2])
-  }
-}
-
 export default {
   winningScore: 7,
   paddle: {
@@ -24,7 +14,15 @@ export default {
     downKey: 75 // k
   },
   ball: {
-    setup: setupBall
+    setup() {
+      return {
+        radius: 6,
+        x: 300,
+        y: 200,
+        velocityX: _.sample([-5, -4, 4, 5]),
+        velocityY: _.sample([-2, -1, 0, 1, 2])
+      }
+    }
   },
   canvas: {
     id: "pong-game",

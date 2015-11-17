@@ -12,12 +12,13 @@ function addControls(params) {
 function restrictBounds(params) {
   let {canvasConfig} = params;
   return function() {
-    let hitTop = this.y <= 0;
-    let hitBottom = this.y + this.height >= canvasConfig.height;
-
-    if (hitTop || hitBottom) this.velocityY = 0;
-    if (hitTop) this.y = 0;
-    if (hitBottom) this.y = canvasConfig.height - this.height;
+    if (this.y <= 0) {
+      this.velocityY = 0;
+      this.y = 0;
+    } else if (this.y + this.height >= canvasConfig.height) {
+      this.velocityY = 0;
+      this.y = canvasConfig.height - this.height;
+    }
   }
 }
 
@@ -42,7 +43,7 @@ function leftPaddleCollision(params) {
         this.y + this.radius >= leftPaddle.y &&
         this.y - this.radius <= leftPaddle.y + leftPaddle.height &&
         this.velocityX <= 0) {
-      this.velocityX = -(this.velocityX - 0.1);
+      this.velocityX = -(this.velocityX - 0.2);
       this.velocityY += (leftPaddle.velocityY / 3);
     }
   }
@@ -56,7 +57,7 @@ function rightPaddleCollision(params) {
         this.y + this.radius >= rightPaddle.y &&
         this.y - this.radius <= rightPaddle.y + rightPaddle.height &&
         this.velocityX >= 0) {
-      this.velocityX = -(this.velocityX + 0.1);
+      this.velocityX = -(this.velocityX + 0.2);
       this.velocityY += (rightPaddle.velocityY / 3);
     }
   }
