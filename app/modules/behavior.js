@@ -4,6 +4,7 @@ function addControls(params) {
     let moveSpeed = 0;
     if (keys[upKey]) moveSpeed -= paddleConfig.moveSpeed;
     if (keys[downKey]) moveSpeed += paddleConfig.moveSpeed;
+    // This plays with the acceleration
     this.y += this.velocityY + (moveSpeed / 3);
     this.velocityY = moveSpeed;
   }
@@ -34,6 +35,7 @@ function wallCollision(params) {
     }
   }
 }
+
 function leftPaddleCollision(params) {
   let {leftPaddle} = params;
   return function() {
@@ -48,6 +50,7 @@ function leftPaddleCollision(params) {
     }
   }
 }
+
 function rightPaddleCollision(params) {
   let {rightPaddle} = params;
   return function() {
@@ -62,6 +65,7 @@ function rightPaddleCollision(params) {
     }
   }
 }
+
 function edgeCollision(params) {
   let {canvasConfig, score} = params;
   return function() {
@@ -77,6 +81,7 @@ function edgeCollision(params) {
     }
   }
 }
+
 function limitVelocity() {
   if (this.velocityX > 6) {
     this.velocityX = 6;
@@ -89,6 +94,7 @@ function limitVelocity() {
     this.velocityY = -6;
   }
 }
+
 function move() {
   this.x += this.velocityX;
   this.y += this.velocityY;

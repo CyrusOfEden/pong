@@ -46,6 +46,7 @@ context.fillRect(0, 0, config.canvas.width, config.canvas.height);
   rightPaddle.compose(restrictBounds);
 }
 
+// Configure the behavior for the ball.
 {
   let wall = behavior.wallCollision({
     canvasConfig: config.canvas
@@ -65,4 +66,5 @@ context.fillRect(0, 0, config.canvas.width, config.canvas.height);
   ball.compose(behavior.move);
 }
 
+// Export the configured environment
 export {entities, canvas, context, score};

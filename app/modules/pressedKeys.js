@@ -1,3 +1,4 @@
+// Returns an always-updated map of which keys are currently being pressed
 export default function pressedKeys() {
   let keys = {};
 

@@ -18,6 +18,8 @@ const COLORS = [
 ];
 let index = 0;
 
+// _.throttle ensures that subsequent calls to the getColor function within a
+// 100ms window return the original value.
 const getColor = _.throttle(() => {
   index = index >= COLORS.length ? 0 : index;
   return COLORS[index++];
@@ -59,6 +61,7 @@ function bootstrap() {
   animate(nextFrame);
 
   $(window).on("keypress", (event) => {
+    // Update the value of paused when the spacebar is pressed
     if (event.keyCode == 32) paused = !paused;
   });
 }
