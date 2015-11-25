@@ -1,8 +1,36 @@
+function addBot(params) {
+  let {ball, paddleConfig, otherPaddle} = params;
+
+  let out = _.range(1, 6);
+  let moveSpeed;
+
+  return function() {
+    // Don't do anything if the ball is near the other player
+    if (ball.x < 100) return;
+    // Russian roulette. The 4th barrel has a bullet.
+    if (_.sample(out) === 4) return;
+
+    moveSpeed = 0;
+    if (ball.y + ball.velocityY < this.y + this.height / 6) {
+      // If the ball is above a 6th into the paddle, move up
+      moveSpeed -= paddleConfig.moveSpeed;
+    }  else if (ball.y + ball.velocityY > this.y + this.height * 5 / 6) {
+      // If the ball below the 5/6th of the paddle
+      moveSpeed += paddleConfig.moveSpeed;
+    }
+
+    // Same logic as controls. Plays with the acceleration.
+    this.y += this.velocityY + (moveSpeed / 3);
+    this.velocityY = moveSpeed;
+  }
+}
+
 function addControls(params) {
   let {keys, upKey, downKey, paddleConfig} = params;
+  let moveSpeed;
   return function() {
-    let moveSpeed = 0;
-    if (keys[upKey]) moveSpeed -= paddleConfig.moveSpeed;
+    moveSpeed = 0;
+    if (keys[upKey])   moveSpeed -= paddleConfig.moveSpeed;
     if (keys[downKey]) moveSpeed += paddleConfig.moveSpeed;
     // This plays with the acceleration
     this.y += this.velocityY + (moveSpeed / 3);
@@ -83,15 +111,15 @@ function edgeCollision(params) {
 }
 
 function limitVelocity() {
-  if (this.velocityX > 6) {
-    this.velocityX = 6;
-  } else if (this.velocityX < -6) {
-    this.velocityX = -6;
+  if (this.velocityX > 7) {
+    this.velocityX = 7;
+  } else if (this.velocityX < -7) {
+    this.velocityX = -7;
   }
-  if (this.velocityY > 6) {
-    this.velocityY = 6;
-  } else if (this.velocityY < -6) {
-    this.velocityY = -6;
+  if (this.velocityY > 7) {
+    this.velocityY = 7;
+  } else if (this.velocityY < -7) {
+    this.velocityY = -7;
   }
 }
 
@@ -101,6 +129,7 @@ function move() {
 }
 
 export default {
+  addBot,
   addControls,
   restrictBounds,
   wallCollision,

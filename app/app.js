@@ -3,12 +3,14 @@ import createPaddle from "./modules/paddle";
 import createBall from "./modules/ball";
 import createScore from "./modules/score";
 
+import queryParams from "./modules/queryParams";
 import pressedKeys from "./modules/pressedKeys";
 
 import behavior from "./modules/behavior";
 
 import config from "./config";
 
+let params = queryParams();
 let keys = pressedKeys();
 
 let score = createScore(config);
@@ -33,10 +35,19 @@ context.fillRect(0, 0, config.canvas.width, config.canvas.height);
     paddleConfig: config.paddle
   };
   let leftConfig = _.extend({}, controlsConfig, config.leftPaddle);
-  let rightConfig = _.extend({}, controlsConfig, config.rightPaddle);
 
   leftPaddle.compose(behavior.addControls(leftConfig));
-  rightPaddle.compose(behavior.addControls(rightConfig));
+
+  if (params.bot === "true")  {
+    let rightConfig = _.extend({}, controlsConfig, {
+      ball: ball,
+      otherPaddle: leftPaddle
+    });
+    rightPaddle.compose(behavior.addBot(rightConfig));
+  } else {
+    let rightConfig = _.extend({}, controlsConfig, config.rightPaddle);
+    rightPaddle.compose(behavior.addControls(rightConfig));
+  }
 
   let restrictBounds = behavior.restrictBounds({
     canvasConfig: config.canvas
